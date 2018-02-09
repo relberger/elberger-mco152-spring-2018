@@ -48,13 +48,10 @@ public class VendingMachine
 	Change pay(double price, double paid)
 	{
 		VendingMachine vm = new VendingMachine();
-		vm.calculateQuarters();
-		vm.calculateDimes();
-		vm.calculateNickels();
-		vm.calculatePennies();
 		vm.calculateTotalChange(price, paid);
 		
-		Change ch = new Change(vm.quarters, vm.dimes, vm.nickels, vm.pennies);
+		Change ch = new Change(vm.calculateQuarters(), vm.calculateDimes(), 
+				vm.calculateNickels(), vm.calculatePennies());
 		return ch;
 	}
 }
