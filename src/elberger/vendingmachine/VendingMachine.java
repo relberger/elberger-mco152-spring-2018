@@ -3,7 +3,7 @@ package elberger.vendingmachine;
 public class VendingMachine
 {
 	int quarters;
-	int nickels; 
+	int nickels;
 	int dimes;
 	int pennies;
 	double totalChange;
@@ -14,12 +14,13 @@ public class VendingMachine
 		totalChange = paid - price;
 		return totalChange;
 	}
+
 	public double calculateRemainingChange(int coin)
 	{
 		remainingChange = totalChange - coin;
 		return remainingChange;
 	}
-	
+
 	public int calculateQuarters()
 	{
 		quarters = (int) (totalChange / 25);
@@ -44,14 +45,13 @@ public class VendingMachine
 		return pennies;
 	}
 
-
 	Change pay(double price, double paid)
 	{
 		VendingMachine vm = new VendingMachine();
 		vm.calculateTotalChange(price, paid);
-		
-		Change ch = new Change(vm.calculateQuarters(), vm.calculateDimes(), 
-				vm.calculateNickels(), vm.calculatePennies());
+
+		Change ch = new Change(vm.calculateQuarters(), vm.calculateDimes(), vm.calculateNickels(),
+				vm.calculatePennies());
 		return ch;
 	}
 }

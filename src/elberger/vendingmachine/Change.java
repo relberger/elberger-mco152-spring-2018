@@ -3,7 +3,7 @@ package elberger.vendingmachine;
 public class Change
 {
 	int quarters;
-	int nickels; 
+	int nickels;
 	int dimes;
 	int pennies;
 
@@ -14,8 +14,7 @@ public class Change
 		this.nickels = nickels;
 		this.pennies = pennies;
 	}
-	
-	
+
 	public int getQuarters()
 	{
 		return quarters;

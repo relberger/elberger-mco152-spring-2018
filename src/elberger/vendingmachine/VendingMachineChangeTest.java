@@ -10,56 +10,56 @@ class VendingMachineChangeTest
 	@Test
 	void testPayQuarters()
 	{
-		//given 
+		// given
 		VendingMachine vm = new VendingMachine();
 		vm.pay(1.34, 2);
-		
-		//when
+
+		// when
 		Change ch = new Change(2, 1, 1, 1);
-		
-		//then
+
+		// then
 		assertEquals(ch.quarters, 2);
 	}
-	
+
 	@Test
 	void testPayDimes()
 	{
-		//given 
+		// given
 		VendingMachine vm = new VendingMachine();
 		vm.pay(1.05, 1.50);
-		
-		//when
+
+		// when
 		Change ch = new Change(1, 1, 1, 0);
-		
-		//then
+
+		// then
 		assertEquals(ch.dimes, 1);
 	}
-	
+
 	@Test
 	void testPayNickels()
 	{
-		//given 
+		// given
 		VendingMachine vm = new VendingMachine();
 		vm.pay(1.80, 2);
-		
-		//when
+
+		// when
 		Change ch = new Change(0, 2, 0, 0);
-		
-		//then
+
+		// then
 		assertEquals(ch.nickels, 0);
 	}
-	
+
 	@Test
 	void testPayPennies()
 	{
-		//given 
+		// given
 		VendingMachine vm = new VendingMachine();
 		vm.pay(1.99, 2);
-		
-		//when
+
+		// when
 		Change ch = new Change(0, 0, 0, 1);
-		
-		//then
+
+		// then
 		assertEquals(ch.pennies, 1);
 	}
 }
