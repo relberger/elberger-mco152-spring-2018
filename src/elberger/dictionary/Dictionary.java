@@ -1,55 +1,47 @@
 package elberger.dictionary;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.util.*;
 
 public class Dictionary
 {
-	public Dictionary(String word)
+	HashMap<String, String> dictionary = new HashMap<String, String>();
+
+	public void readFile(String fName) throws FileNotFoundException
 	{
-		this.word = word;
+		String fileName = fName;
+		Scanner scanner = new Scanner(new FileReader(new File(fileName)));
+
+		while (scanner.hasNext())
+		{
+			String word = scanner.next();
+			String definition = scanner.nextLine();
+			dictionary.put(word, definition);
+		}
+
+		scanner.close();
 	}
 
-	String word;
-	String[] entries;
-
-	//test if word exists in dictionary
-	public boolean contains(String word, Scanner inputFile)
+	public boolean contains(String word)
 	{
-		//read each dictionary entry into array
-		while (inputFile.hasNext())
+		if (dictionary.containsKey(word.toUpperCase()))
 		{
-			String entry;
-			entry = inputFile.next();
-
-			entries = entry.split("[\\r\\n]+");
+			return true;
 		}
-		
 
-		//loop through arrays by first word
-		boolean isTrue = true;
-		for (int ii = 0; ii < entries.length; ii++)
+		else
 		{
-			if (entries[ii].split(" ", 2).equals(word))
-			{
-				isTrue = true;
-			}
-			else
-			{
-				isTrue = false;
-			}
+			return false;
 		}
-		return isTrue;
 	}
 
-	//get definition as end of array
 	public String getDefinition(String word)
 	{
-		if (contains(word, null) == true)
+		if (contains(word) == true)
 		{
-			int location = word.indexOf(word);
-			String definition;
-			definition = entries[location + 1];
-			return definition;
+			return dictionary.get(word);
 		} 
 		else
 		{
