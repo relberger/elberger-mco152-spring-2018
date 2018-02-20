@@ -16,18 +16,29 @@ class DictionaryTest
 	public void contains() throws FileNotFoundException
 	{
 		// given
-		File read = new File("C:/Users/chokl/Downloads/dictionary.txt");
-		FileReader fReader = new FileReader(read);
-		Scanner inputFile = new Scanner(fReader);
-		Dictionary dd = new Dictionary("ET");
+		Dictionary dd = new Dictionary();
+		dd.readFile("src/elberger/dictionary/dictionary.txt");
 
 		// when
-		String word = dd.word;
+		String word = "et";
 
 		// then
-		assertEquals(true, dd.contains("ET", inputFile));
-		
-		inputFile.close();
+		assertTrue(dd.contains(word));
+	}
+
+	@Test
+	public void getDefinition() throws FileNotFoundException
+	{
+		// given
+		Dictionary dd = new Dictionary();
+		dd.readFile("src/elberger/dictionary/dictionary.txt");
+
+		// when
+		String word = "4";
+
+		// then
+		assertEquals(null,
+				dd.getDefinition(word));
 	}
 
 }
