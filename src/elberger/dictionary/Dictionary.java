@@ -9,7 +9,7 @@ public class Dictionary
 {
 	HashMap<String, String> dictionary = new HashMap<String, String>();
 
-	public void readFile(String fName) throws FileNotFoundException
+	public Dictionary(String fName) throws FileNotFoundException
 	{
 		String fileName = fName;
 		Scanner scanner = new Scanner(new FileReader(new File(fileName)));

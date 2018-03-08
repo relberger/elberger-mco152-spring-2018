@@ -16,8 +16,7 @@ class DictionaryTest
 	public void contains() throws FileNotFoundException
 	{
 		// given
-		Dictionary dd = new Dictionary();
-		dd.readFile("src/elberger/dictionary/dictionary.txt");
+		Dictionary dd = new Dictionary("src/elberger/dictionary/dictionary.txt");
 
 		// when
 		String word = "et";
@@ -30,8 +29,7 @@ class DictionaryTest
 	public void getDefinition() throws FileNotFoundException
 	{
 		// given
-		Dictionary dd = new Dictionary();
-		dd.readFile("src/elberger/dictionary/dictionary.txt");
+		Dictionary dd = new Dictionary("src/elberger/dictionary/dictionary.txt");
 
 		// when
 		String word = "4";

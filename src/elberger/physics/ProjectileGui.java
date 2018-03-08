@@ -50,7 +50,7 @@ public class ProjectileGui extends JFrame implements PropertyChangeListener
 
 		add(panel);
 
-		xCoordinate.addPropertyChangeListener(this::propertyChange);
+		time.addPropertyChangeListener(this::propertyChange);
 	}
 
 	public void propertyChange(PropertyChangeEvent e) 

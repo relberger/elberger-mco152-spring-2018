@@ -3,6 +3,7 @@ package elberger.dictionary;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
+import java.io.FileNotFoundException;
 
 import javax.swing.*;
 
@@ -34,19 +35,29 @@ public class DictionaryGui extends JFrame
 		
 		add(panel);
 		
-		search.addActionListener(this::changeTextArea);
+		search.addActionListener(e ->
+		{
+			try
+			{
+				changeTextArea(e);
+			} catch (FileNotFoundException e1)
+			{
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		});
 
 	}
 	
-	
-	public void changeTextArea(ActionEvent listener)
+	public void changeTextArea(ActionEvent event) throws FileNotFoundException
 	{
-		DictionaryGui dg = new DictionaryGui();
-		Dictionary dd = new Dictionary();
+		Dictionary dd = new Dictionary("src/elberger/dictionary/dictionary.txt");
 		
-		String wrd = dg.word.getText();
+		String wrd = word.getText();
 				
-		dd.getDefinition(wrd);
+		String def = dd.getDefinition(wrd);
+		
+		definition.setText(def);
 	}
 	
 	public static void main(String[] args)
