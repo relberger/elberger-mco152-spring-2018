@@ -41,7 +41,7 @@ public class Dictionary
 	{
 		if (contains(word) == true)
 		{
-			return dictionary.get(word);
+			return dictionary.get(word.toUpperCase());
 		} 
 		else
 		{
