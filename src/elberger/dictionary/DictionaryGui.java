@@ -1,13 +1,10 @@
 package elberger.dictionary;
 
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.io.FileNotFoundException;
 
 import javax.swing.*;
-
-import elberger.physics.ProjectileGui;
 
 public class DictionaryGui extends JFrame
 {
@@ -46,7 +43,6 @@ public class DictionaryGui extends JFrame
 				e1.printStackTrace();
 			}
 		});
-
 	}
 	
 	public void changeTextArea(ActionEvent event) throws FileNotFoundException
