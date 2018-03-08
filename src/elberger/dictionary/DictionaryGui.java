@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 
 import javax.swing.*;
 
+@SuppressWarnings("serial")
 public class DictionaryGui extends JFrame
 {
 	private JTextArea definition = new JTextArea();
