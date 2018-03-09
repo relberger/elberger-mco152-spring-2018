@@ -31,14 +31,14 @@ public class DictionaryGui extends JFrame
 				
 		northPanel.add(word);
 		
-		try
+	/*	try
 		{
 			Image searchImage = ImageIO.read(new File("src/elberger/dictionary/magnifying-glass.png"));
 			search.setIcon(new ImageIcon(searchImage));
 		} catch (IOException e2)
 		{
 			e2.printStackTrace();
-		}
+		}*/
 		
 		northPanel.add(search);
 		

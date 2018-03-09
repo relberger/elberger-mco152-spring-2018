@@ -7,7 +7,6 @@ public class VendingMachine
 	int dimes;
 	int pennies;
 	double totalChange;
-	double remainingChange;
 
 	public double calculateTotalChange(double price, double paid)
 	{
@@ -15,43 +14,19 @@ public class VendingMachine
 		return totalChange;
 	}
 
-	public double calculateRemainingChange(int coin)
-	{
-		remainingChange = totalChange - coin;
-		return remainingChange;
-	}
-
-	public int calculateQuarters()
-	{
-		quarters = (int) (totalChange / 25);
-		return quarters;
-	}
-
-	public int calculateDimes()
-	{
-		dimes = (int) (calculateRemainingChange(quarters) / 10);
-		return dimes;
-	}
-
-	public int calculateNickels()
-	{
-		nickels = (int) (calculateRemainingChange(dimes) / 5);
-		return nickels;
-	}
-
-	public int calculatePennies()
-	{
-		pennies = (int) (calculateRemainingChange(nickels) / 1);
-		return pennies;
-	}
-
 	Change pay(double price, double paid)
 	{
-		VendingMachine vm = new VendingMachine();
-		vm.calculateTotalChange(price, paid);
+		double change = calculateTotalChange(price, paid);
+		
+		quarters = (int) (change / .25);
+		double afterQuarters = (change - (quarters * .25));
+		dimes = (int) (afterQuarters / .10);
+		double afterDimes = (afterQuarters - (dimes * .1));
+		nickels = (int) (afterDimes / .05);
+		double afterNickels = (afterDimes - (nickels * .05));
+		pennies = (int) Math.round(afterNickels / .01);
 
-		Change ch = new Change(vm.calculateQuarters(), vm.calculateDimes(), vm.calculateNickels(),
-				vm.calculatePennies());
-		return ch;
+		Change ch = new Change(quarters, dimes, nickels, pennies);
+		return ch; 
 	}
 }
