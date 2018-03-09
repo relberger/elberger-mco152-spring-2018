@@ -8,15 +8,9 @@ public class VendingMachine
 	int pennies;
 	double totalChange;
 
-	public double calculateTotalChange(double price, double paid)
-	{
-		totalChange = paid - price;
-		return totalChange;
-	}
-
 	Change pay(double price, double paid)
 	{
-		double change = calculateTotalChange(price, paid);
+		double change = paid - price;
 		
 		quarters = (int) (change / .25);
 		double afterQuarters = (change - (quarters * .25));
