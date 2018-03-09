@@ -1,9 +1,13 @@
 package elberger.dictionary;
 
 import java.awt.BorderLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 @SuppressWarnings("serial")
@@ -26,6 +30,16 @@ public class DictionaryGui extends JFrame
 		northPanel.setLayout(new BoxLayout(northPanel, BoxLayout.X_AXIS));
 				
 		northPanel.add(word);
+		
+		try
+		{
+			Image searchImage = ImageIO.read(new File("src/elberger/dictionary/magnifying-glass.png"));
+			search.setIcon(new ImageIcon(searchImage));
+		} catch (IOException e2)
+		{
+			e2.printStackTrace();
+		}
+		
 		northPanel.add(search);
 		
 		panel.add(northPanel, BorderLayout.NORTH);
