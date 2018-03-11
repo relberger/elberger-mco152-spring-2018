@@ -45,6 +45,8 @@ public class DictionaryGui extends JFrame
 		panel.add(northPanel, BorderLayout.NORTH);
 		panel.add(definition, BorderLayout.CENTER);
 		
+		definition.setEditable(false);
+		
 		add(panel);
 		
 		search.addActionListener(e ->

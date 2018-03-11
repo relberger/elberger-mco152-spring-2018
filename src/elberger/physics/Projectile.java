@@ -5,7 +5,6 @@ public class Projectile
 	double angle;
 	double velocity;
 	
-	
 	public Projectile(double angle, double velocity) 
 	{
 		this.angle = angle;

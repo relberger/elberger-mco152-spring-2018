@@ -45,6 +45,11 @@ public class VendingMachineGui extends JFrame
 		panel.add(pennies);
 		add(panel);
 		
+		quarters.setEditable(false);
+		dimes.setEditable(false);
+		nickels.setEditable(false);
+		pennies.setEditable(false);
+		
 		makeChange.addActionListener(this::assignChange);
 		
 	}

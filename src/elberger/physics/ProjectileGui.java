@@ -1,25 +1,18 @@
 package elberger.physics;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 public class ProjectileGui extends JFrame implements PropertyChangeListener
 {
 
-	private JTextField angle;
-	private JTextField velocity;
-	private JTextField time;
-	private JTextArea xCoordinate;
-	private JTextArea yCoordinate;
+	private JFormattedTextField angle;
+	private JFormattedTextField velocity;
+	private JFormattedTextField time;
+	private JFormattedTextField xCoordinate;
+	private JFormattedTextField yCoordinate;
 
 	public ProjectileGui()
 	{
@@ -30,13 +23,13 @@ public class ProjectileGui extends JFrame implements PropertyChangeListener
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-		angle = new JTextField("");
-		velocity = new JTextField("");
-		time = new JTextField("");
-		xCoordinate = new JTextArea("");
-		yCoordinate = new JTextArea("");
+		angle = new JFormattedTextField("");
+		velocity = new JFormattedTextField("");
+		time = new JFormattedTextField("");
+		xCoordinate = new JFormattedTextField("");
+		yCoordinate = new JFormattedTextField("");
 
-		panel.add(new JLabel("Angle"));
+		panel.add(new JLabel("Angle:"));
 		panel.add(angle);
 		panel.add(new JLabel("Velocity:"));
 		panel.add(velocity);
@@ -47,36 +40,33 @@ public class ProjectileGui extends JFrame implements PropertyChangeListener
 		panel.add(xCoordinate);
 		panel.add(new JLabel("Y Coordinate:"));
 		panel.add(yCoordinate);
+		
+		xCoordinate.setEditable(false);
+		yCoordinate.setEditable(false);
 
+		angle.addPropertyChangeListener("value", this::propertyChange);
+		velocity.addPropertyChangeListener("value", this::propertyChange);
+		time.addPropertyChangeListener("value", this::propertyChange);
+		
 		add(panel);
 
-		time.addPropertyChangeListener(this::propertyChange);
 	}
 
-	public void propertyChange(PropertyChangeEvent e) 
+	public void propertyChange(PropertyChangeEvent event)
 	{
-		double ang = Double.parseDouble(angle.getText());
-		double vel = Double.parseDouble(velocity.getText());
-		double tim = Double.parseDouble(time.getText());
+		double angleDouble = Double.parseDouble(angle.getText());
+		double velocityDouble = Double.parseDouble(velocity.getText());
+		double timeDouble = Double.parseDouble(time.getText());
 		
-		Projectile pp = new Projectile(ang, vel);
-		
-		double xx = pp.getX(tim);
-		String xVal = Double.toString(xx);	
-		
-		double yy = pp.getY(tim);
-		String yVal = Double.toString(xx);
-		
-		String time = e.getPropertyName();
-		if (!time.isEmpty()) 
-		{
-			xCoordinate.setText(xVal);
-			yCoordinate.setText(yVal);			
-		}
+		Projectile pp = new Projectile (angleDouble, velocityDouble);
+				
+		xCoordinate.setValue(pp.getX(timeDouble));
+		yCoordinate.setValue(pp.getY(timeDouble));			
 	}
 
 	public static void main(String[] args)
 	{
 		new ProjectileGui().setVisible(true);
 	}
+
 }
