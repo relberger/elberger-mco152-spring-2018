@@ -47,7 +47,7 @@ public class ProjectileGui extends JFrame implements DocumentListener
 		yCoordinate.setEditable(false);
 
 		angle.getDocument().addDocumentListener(this);
-//		angle.getDocument().putProperty("", "");
+		angle.getDocument().putProperty("", "");
 		velocity.getDocument().addDocumentListener(this);
 		velocity.getDocument().putProperty("", "");
 		time.getDocument().addDocumentListener(this);
