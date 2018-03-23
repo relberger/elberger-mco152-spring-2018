@@ -13,6 +13,7 @@ import javax.swing.JComponent;
 public class ProjectileGraph extends JComponent
 {
 	private Image projectileImage;
+	double time = 0;
 
 	@Override
 	protected void paintComponent(Graphics g1)
@@ -43,6 +44,7 @@ public class ProjectileGraph extends JComponent
 		g1.setColor(Color.BLUE);
 		drawProjectilePath(g1, projectile3);
 
+		time += .005;
 	}
 
 	public void drawProjectilePath(Graphics g2, Projectile pp)
@@ -52,8 +54,8 @@ public class ProjectileGraph extends JComponent
 
 		for (int ii = 0; ii < 15; ii++)
 		{
-			int xx = (int) pp.getX(ii);
-			int yy = -(int) pp.getY(ii);
+			int xx = (int) pp.getX(time);
+			int yy = -(int) pp.getY(time);
 
 			g2.fillOval(xx, yy, 10, 10);
 

@@ -14,6 +14,7 @@ import javax.swing.event.DocumentListener;
 
 public class ProjectileGraphGui extends JFrame
 {
+	private ProjectileGraph projectileGraph;
 
 	public ProjectileGraphGui() 
 	{
@@ -24,11 +25,23 @@ public class ProjectileGraphGui extends JFrame
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
 		
-		panel.add(new ProjectileGraph(), BorderLayout.CENTER);
+		projectileGraph = new ProjectileGraph();
+		panel.add(projectileGraph, BorderLayout.CENTER);
 
-		setContentPane(panel);		
+		setContentPane(panel);	
+		
+		Thread thread = new Thread(this::advanceGraph);
+		thread.start();
 	}
 
+	public void advanceGraph()
+	{
+		while(true)
+		{
+			projectileGraph.repaint();
+		}
+	}
+	
 	public static void main(String[] args)
 	{
 		new ProjectileGraphGui().setVisible(true);
