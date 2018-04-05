@@ -132,11 +132,11 @@ public class WordCounterGUI extends JFrame
 			}
 		});
 		
-		searchNorthangerAbbey.addActionListener(e ->
+		searchMansfieldPark.addActionListener(e ->
 		{
 			try
 			{
-				changeTextNorthangerAbbey(e);
+				changeTextMansfieldPark(e);
 			} 
 			catch (FileNotFoundException e1)
 			{
