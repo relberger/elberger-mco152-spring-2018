@@ -26,7 +26,7 @@ public class WordCounter
 			words.add(word);
 		}
 	}
-	
+
 	public int Count(String word)
 	{
 		int frequency = Collections.frequency(words, word);
