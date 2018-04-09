@@ -17,7 +17,7 @@ public class WordCounter
 		String bookTitle = book;
 		String word = null;
 		Scanner scanner = new Scanner(new FileReader(new File(bookTitle)));
-		scanner.useDelimiter("[^a-zA-Z']+");
+		scanner.useDelimiter("[^a-zA-Z'-]+");
 
 		while (scanner.hasNext())
 		{
