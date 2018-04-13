@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.util.function.Predicate;
 
 import com.google.gson.*;
 public class EarthquakeReader
@@ -17,7 +18,10 @@ public class EarthquakeReader
 		
 		EarthquakeFeed feed = gson.fromJson(in, EarthquakeFeed.class);
 		
-		System.out.println(feed.getFeatures().stream().filter(e -> e.getProperties().getMag() >= 5).count());
+		System.out.println(feed.getFeatures()
+									.stream()
+									.filter(e -> e.getProperties().getMag() >= 5)
+									.count());
 	}
 
 }
