@@ -91,7 +91,7 @@ public class EarthquakeGUI extends JFrame implements WindowListener
 
 	}
 
-	public void getMonthValues(WindowEvent e)
+	public void getMonthValues()
 	{
 		Call<EarthquakeFeed> callMonth = service.getAllMonth();
 		callMonth.enqueue(new Callback<EarthquakeFeed>()
@@ -119,7 +119,7 @@ public class EarthquakeGUI extends JFrame implements WindowListener
 				});
 	}
 	
-	public void getWeekValues(WindowEvent e)
+	public void getWeekValues()
 	{
 		Call<EarthquakeFeed> callWeek = service.getAllWeek();
 		callWeek.enqueue(new Callback<EarthquakeFeed>()
@@ -147,7 +147,7 @@ public class EarthquakeGUI extends JFrame implements WindowListener
 				});
 	}
 	
-	public void getDayValues(WindowEvent e)
+	public void getDayValues()
 	{
 		Call<EarthquakeFeed> callDay = service.getAllDay();
 		callDay.enqueue(new Callback<EarthquakeFeed>()
@@ -175,7 +175,7 @@ public class EarthquakeGUI extends JFrame implements WindowListener
 		});
 	}
 	
-	public void getHourValues(WindowEvent e)
+	public void getHourValues()
 	{
 		Call<EarthquakeFeed> callHour = service.getAllHour();
 		callHour.enqueue(new Callback<EarthquakeFeed>()
@@ -243,10 +243,10 @@ public class EarthquakeGUI extends JFrame implements WindowListener
 	@Override
 	public void windowOpened(WindowEvent e)
 	{
-		getMonthValues(e);
-		getWeekValues(e);
-		getDayValues(e);
-		getHourValues(e);		
+		getMonthValues();
+		getWeekValues();
+		getDayValues();
+		getHourValues();		
 	}
 		
 	public static void main(String[] args)
