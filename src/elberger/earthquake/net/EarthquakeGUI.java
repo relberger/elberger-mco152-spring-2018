@@ -212,6 +212,7 @@ public class EarthquakeGUI extends JFrame
 		});
 		
 	}
+	
 	public static void main(String[] args)
 	{
 		new EarthquakeGUI().setVisible(true);
