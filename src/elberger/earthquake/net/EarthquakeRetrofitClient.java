@@ -36,8 +36,8 @@ public class EarthquakeRetrofitClient
 								.stream()
 								.max(Comparator.comparing(e -> e.getProperties().getMag()));
 							
-							System.out.println(greatestMonth.get().getProperties().getMag());
-							System.out.println(greatestMonth.get().getProperties().getPlace());
+							System.out.println("Month magnitude: " + greatestMonth.get().getProperties().getMag());
+							System.out.println("Month location: " + greatestMonth.get().getProperties().getPlace());
 					}
 					
 					@Override
@@ -61,8 +61,8 @@ public class EarthquakeRetrofitClient
 								.stream()
 								.max(Comparator.comparing(e -> e.getProperties().getMag()));
 							
-							System.out.println(greatestWeek.get().getProperties().getMag());
-							System.out.println(greatestWeek.get().getProperties().getPlace());
+							System.out.println("Week magnitude: "+ greatestWeek.get().getProperties().getMag());
+							System.out.println("Week location: " + greatestWeek.get().getProperties().getPlace());
 					}
 					
 					@Override
@@ -85,8 +85,8 @@ public class EarthquakeRetrofitClient
 								.stream()
 								.max(Comparator.comparing(e -> e.getProperties().getMag()));
 							
-							System.out.println(greatestDay.get().getProperties().getMag());
-							System.out.println(greatestDay.get().getProperties().getPlace());
+							System.out.println("Day magnitude: " + greatestDay.get().getProperties().getMag());
+							System.out.println("Day location: " + greatestDay.get().getProperties().getPlace());
 					}
 					
 					@Override
@@ -109,8 +109,8 @@ public class EarthquakeRetrofitClient
 							.stream()
 							.max(Comparator.comparing(e -> e.getProperties().getMag()));
 						
-						System.out.println(greatestHour.get().getProperties().getMag());
-						System.out.println(greatestHour.get().getProperties().getPlace());
+						System.out.println("Hour magnitude: " + greatestHour.get().getProperties().getMag());
+						System.out.println("Hour location: " + greatestHour.get().getProperties().getPlace());
 					}
 					
 					@Override

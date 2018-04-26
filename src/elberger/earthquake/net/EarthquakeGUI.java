@@ -35,12 +35,7 @@ public class EarthquakeGUI extends JFrame
 			.build();
 	
 	UsgsEarthquakeService service = retrofit.create(UsgsEarthquakeService.class);
-	
-	Call<EarthquakeFeed> callMonth = service.getAllMonth();
-	Call<EarthquakeFeed> callWeek = service.getAllWeek();
-	Call<EarthquakeFeed> callDay = service.getAllDay();
-	Call<EarthquakeFeed> callHour = service.getAllHour();
-	
+		
 	public EarthquakeGUI()
 	{
 		setTitle("Largest Earthquakes");
@@ -106,6 +101,7 @@ public class EarthquakeGUI extends JFrame
 
 	public void getMonthValues(ActionEvent e)
 	{
+		Call<EarthquakeFeed> callMonth = service.getAllMonth();
 		callMonth.enqueue(new Callback<EarthquakeFeed>()
 				{
 					@Override
@@ -133,6 +129,7 @@ public class EarthquakeGUI extends JFrame
 	
 	public void getWeekValues(ActionEvent e)
 	{
+		Call<EarthquakeFeed> callWeek = service.getAllWeek();
 		callWeek.enqueue(new Callback<EarthquakeFeed>()
 				{
 					@Override
@@ -160,6 +157,7 @@ public class EarthquakeGUI extends JFrame
 	
 	public void getDayValues(ActionEvent e)
 	{
+		Call<EarthquakeFeed> callDay = service.getAllDay();
 		callDay.enqueue(new Callback<EarthquakeFeed>()
 		{
 			@Override
@@ -187,6 +185,7 @@ public class EarthquakeGUI extends JFrame
 	
 	public void getHourValues(ActionEvent e)
 	{
+		Call<EarthquakeFeed> callHour = service.getAllHour();
 		callHour.enqueue(new Callback<EarthquakeFeed>()
 		{
 			@Override
