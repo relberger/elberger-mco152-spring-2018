@@ -91,16 +91,7 @@ public class EarthquakeGUI extends JFrame implements WindowListener
 
 	}
 
-	@Override
-	public void windowOpened(WindowEvent e)
-	{
-		getMonthValues(e);
-		getWeekValues(e);
-		getDayValues(e);
-		getHourValues(e);		
-	}
-	
-	public void getMonthValues(WindowEvent e)
+	public void getMonthMag(WindowEvent e)
 	{
 		Call<EarthquakeFeed> callMonth = service.getAllMonth();
 		callMonth.enqueue(new Callback<EarthquakeFeed>()
@@ -115,8 +106,32 @@ public class EarthquakeGUI extends JFrame implements WindowListener
 								.max(Comparator.comparing(e -> e.getProperties().getMag()));
 							
 							String monthMagValue = String.valueOf(greatestMonth.get().getProperties().getMag());
-							String monthLocValue = String.valueOf(greatestMonth.get().getProperties().getPlace());
 							monthMag.setText(monthMagValue);
+					}
+					
+					@Override
+					public void onFailure(Call<EarthquakeFeed> callMonth, Throwable t)
+					{
+						t.printStackTrace();
+					}
+				});
+	}
+	
+	public void getMonthLoc(WindowEvent e)
+	{
+		Call<EarthquakeFeed> callMonth = service.getAllMonth();
+		callMonth.enqueue(new Callback<EarthquakeFeed>()
+				{
+					@Override
+					public void onResponse(Call<EarthquakeFeed> callMonth, Response<EarthquakeFeed> responseMonth)
+					{
+						EarthquakeFeed feedMonth = responseMonth.body();
+						
+						Optional<Earthquake> greatestMonth = feedMonth.getFeatures()
+								.stream()
+								.max(Comparator.comparing(e -> e.getProperties().getMag()));
+							
+							String monthLocValue = String.valueOf(greatestMonth.get().getProperties().getPlace());
 							monthLoc.setText(monthLocValue);
 					}
 					
@@ -128,7 +143,7 @@ public class EarthquakeGUI extends JFrame implements WindowListener
 				});
 	}
 	
-	public void getWeekValues(WindowEvent e)
+	public void getWeekMag(WindowEvent e)
 	{
 		Call<EarthquakeFeed> callWeek = service.getAllWeek();
 		callWeek.enqueue(new Callback<EarthquakeFeed>()
@@ -143,8 +158,32 @@ public class EarthquakeGUI extends JFrame implements WindowListener
 								.max(Comparator.comparing(e -> e.getProperties().getMag()));
 							
 							String weekMagValue = String.valueOf(greatestWeek.get().getProperties().getMag());
-							String weekLocValue = String.valueOf(greatestWeek.get().getProperties().getPlace());
 							weekMag.setText(weekMagValue);
+					}
+					
+					@Override
+					public void onFailure(Call<EarthquakeFeed> callMonth, Throwable t)
+					{
+						t.printStackTrace();
+					}
+				});
+	}
+	
+	public void getWeekLoc(WindowEvent e)
+	{
+		Call<EarthquakeFeed> callWeek = service.getAllWeek();
+		callWeek.enqueue(new Callback<EarthquakeFeed>()
+				{
+					@Override
+					public void onResponse(Call<EarthquakeFeed> callWeek, Response<EarthquakeFeed> responseWeek)
+					{
+						EarthquakeFeed feedWeek = responseWeek.body();
+						
+						Optional<Earthquake> greatestWeek = feedWeek.getFeatures()
+								.stream()
+								.max(Comparator.comparing(e -> e.getProperties().getMag()));
+							
+							String weekLocValue = String.valueOf(greatestWeek.get().getProperties().getPlace());
 							weekLoc.setText(weekLocValue);
 					}
 					
@@ -156,7 +195,7 @@ public class EarthquakeGUI extends JFrame implements WindowListener
 				});
 	}
 	
-	public void getDayValues(WindowEvent e)
+	public void getDayMag(WindowEvent e)
 	{
 		Call<EarthquakeFeed> callDay = service.getAllDay();
 		callDay.enqueue(new Callback<EarthquakeFeed>()
@@ -171,8 +210,32 @@ public class EarthquakeGUI extends JFrame implements WindowListener
 						.max(Comparator.comparing(e -> e.getProperties().getMag()));
 					
 					String dayMagValue = String.valueOf(greatestDay.get().getProperties().getMag());
-					String dayLocValue = String.valueOf(greatestDay.get().getProperties().getPlace());
 					dayMag.setText(dayMagValue);
+			}
+			
+			@Override
+			public void onFailure(Call<EarthquakeFeed> callDay, Throwable t)
+			{
+				t.printStackTrace();
+			}
+		});
+	}
+	
+	public void getDayLoc(WindowEvent e)
+	{
+		Call<EarthquakeFeed> callDay = service.getAllDay();
+		callDay.enqueue(new Callback<EarthquakeFeed>()
+		{
+			@Override
+			public void onResponse(Call<EarthquakeFeed> callDay, Response<EarthquakeFeed> responseDay)
+			{
+				EarthquakeFeed feedDay = responseDay.body();
+				
+				Optional<Earthquake> greatestDay = feedDay.getFeatures()
+						.stream()
+						.max(Comparator.comparing(e -> e.getProperties().getMag()));
+					
+					String dayLocValue = String.valueOf(greatestDay.get().getProperties().getPlace());
 					dayLoc.setText(dayLocValue);
 			}
 			
@@ -184,7 +247,7 @@ public class EarthquakeGUI extends JFrame implements WindowListener
 		});
 	}
 	
-	public void getHourValues(WindowEvent e)
+	public void getHourMag(WindowEvent e)
 	{
 		Call<EarthquakeFeed> callHour = service.getAllHour();
 		callHour.enqueue(new Callback<EarthquakeFeed>()
@@ -199,8 +262,33 @@ public class EarthquakeGUI extends JFrame implements WindowListener
 					.max(Comparator.comparing(e -> e.getProperties().getMag()));
 				
 				String hourMagValue = String.valueOf(greatestHour.get().getProperties().getMag());
-				String hourLocValue = String.valueOf(greatestHour.get().getProperties().getPlace());
 				hourMag.setText(hourMagValue);
+			}
+			
+			@Override
+			public void onFailure(Call<EarthquakeFeed> callHour, Throwable t)
+			{
+				t.printStackTrace();
+			}
+		});
+		
+	}
+
+	public void getHourLoc(WindowEvent e)
+	{
+		Call<EarthquakeFeed> callHour = service.getAllHour();
+		callHour.enqueue(new Callback<EarthquakeFeed>()
+		{
+			@Override
+			public void onResponse(Call<EarthquakeFeed> callHour, Response<EarthquakeFeed> responseHour)
+			{
+				EarthquakeFeed feedHour = responseHour.body();
+				
+				Optional<Earthquake> greatestHour = feedHour.getFeatures()
+					.stream()
+					.max(Comparator.comparing(e -> e.getProperties().getMag()));
+				
+				String hourLocValue = String.valueOf(greatestHour.get().getProperties().getPlace());
 				hourLoc.setText(hourLocValue);
 			}
 			
@@ -216,45 +304,52 @@ public class EarthquakeGUI extends JFrame implements WindowListener
 	@Override
 	public void windowActivated(WindowEvent e)
 	{
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void windowClosed(WindowEvent e)
 	{
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void windowClosing(WindowEvent e)
 	{
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void windowDeactivated(WindowEvent e)
 	{
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void windowDeiconified(WindowEvent e)
 	{
-		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void windowIconified(WindowEvent e)
 	{
-		// TODO Auto-generated method stub
 		
 	}
 	
+	@Override
+	public void windowOpened(WindowEvent e)
+	{
+		getMonthMag(e);
+		getMonthLoc(e);
+		getWeekMag(e);
+		getWeekLoc(e);
+		getDayMag(e);
+		getDayLoc(e);
+		getHourMag(e);		
+		getHourLoc(e);		
+	}
+		
 	public static void main(String[] args)
 	{
 		new EarthquakeGUI().setVisible(true);
