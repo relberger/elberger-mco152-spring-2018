@@ -32,11 +32,12 @@ public class EarthquakeRetrofitClient
 					{
 						EarthquakeFeed feedMonth = responseMonth.body();
 						
-						System.out.println(
-								feedMonth.getFeatures()
-									.stream()
-									.filter(e -> e.getProperties().getMag() >= 5)
-									.count());
+						Optional<Earthquake> greatestMonth = feedMonth.getFeatures()
+								.stream()
+								.max(Comparator.comparing(e -> e.getProperties().getMag()));
+							
+							System.out.println(greatestMonth.get().getProperties().getMag());
+							System.out.println(greatestMonth.get().getProperties().getPlace());
 					}
 					
 					@Override
@@ -56,11 +57,12 @@ public class EarthquakeRetrofitClient
 					{
 						EarthquakeFeed feedWeek = responseWeek.body();
 						
-						System.out.println(
-								feedWeek.getFeatures()
-									.stream()
-									.filter(e -> e.getProperties().getMag() >= 5)
-									.count());
+						Optional<Earthquake> greatestWeek = feedWeek.getFeatures()
+								.stream()
+								.max(Comparator.comparing(e -> e.getProperties().getMag()));
+							
+							System.out.println(greatestWeek.get().getProperties().getMag());
+							System.out.println(greatestWeek.get().getProperties().getPlace());
 					}
 					
 					@Override
@@ -79,11 +81,12 @@ public class EarthquakeRetrofitClient
 					{
 						EarthquakeFeed feedDay = responseDay.body();
 						
-						System.out.println(
-								feedDay.getFeatures()
-									.stream()
-									.filter(e -> e.getProperties().getMag() >= 5)
-									.count());
+						Optional<Earthquake> greatestDay = feedDay.getFeatures()
+								.stream()
+								.max(Comparator.comparing(e -> e.getProperties().getMag()));
+							
+							System.out.println(greatestDay.get().getProperties().getMag());
+							System.out.println(greatestDay.get().getProperties().getPlace());
 					}
 					
 					@Override
