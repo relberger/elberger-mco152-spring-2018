@@ -2,7 +2,8 @@ package elberger.earthquake.net;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 import java.util.Comparator;
 import java.util.Optional;
 
@@ -16,10 +17,9 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class EarthquakeGUI extends JFrame
+public class EarthquakeGUI extends JFrame implements WindowListener
 {
 	private static final long serialVersionUID = 6111006689421939040L;
-	private JButton button = new JButton("Find largest earthquakes in past month, week, day, and hour");
 	private JTextField monthMag = new JTextField();
 	private JTextField monthLoc = new JTextField();
 	private JTextField weekMag = new JTextField();
@@ -44,8 +44,6 @@ public class EarthquakeGUI extends JFrame
 
 		JPanel panel = new JPanel();
 		panel.setLayout(new BorderLayout());
-		
-		panel.add(button, BorderLayout.NORTH);
 		
 		JPanel earthquakePanel = new JPanel();
 		earthquakePanel.setLayout(new GridLayout(8, 2));
@@ -85,13 +83,7 @@ public class EarthquakeGUI extends JFrame
 		hourMag.setEditable(false);
 		hourLoc.setEditable(false);
 		
-		button.addActionListener(e -> 
-		{
-			getMonthValues(e);
-			getWeekValues(e);
-			getDayValues(e);
-			getHourValues(e);
-		});
+		addWindowListener(this);
 		
 		panel.add(earthquakePanel, BorderLayout.CENTER);
 		
@@ -99,7 +91,16 @@ public class EarthquakeGUI extends JFrame
 
 	}
 
-	public void getMonthValues(ActionEvent e)
+	@Override
+	public void windowOpened(WindowEvent e)
+	{
+		getMonthValues(e);
+		getWeekValues(e);
+		getDayValues(e);
+		getHourValues(e);		
+	}
+	
+	public void getMonthValues(WindowEvent e)
 	{
 		Call<EarthquakeFeed> callMonth = service.getAllMonth();
 		callMonth.enqueue(new Callback<EarthquakeFeed>()
@@ -127,7 +128,7 @@ public class EarthquakeGUI extends JFrame
 				});
 	}
 	
-	public void getWeekValues(ActionEvent e)
+	public void getWeekValues(WindowEvent e)
 	{
 		Call<EarthquakeFeed> callWeek = service.getAllWeek();
 		callWeek.enqueue(new Callback<EarthquakeFeed>()
@@ -155,7 +156,7 @@ public class EarthquakeGUI extends JFrame
 				});
 	}
 	
-	public void getDayValues(ActionEvent e)
+	public void getDayValues(WindowEvent e)
 	{
 		Call<EarthquakeFeed> callDay = service.getAllDay();
 		callDay.enqueue(new Callback<EarthquakeFeed>()
@@ -183,7 +184,7 @@ public class EarthquakeGUI extends JFrame
 		});
 	}
 	
-	public void getHourValues(ActionEvent e)
+	public void getHourValues(WindowEvent e)
 	{
 		Call<EarthquakeFeed> callHour = service.getAllHour();
 		callHour.enqueue(new Callback<EarthquakeFeed>()
@@ -211,10 +212,51 @@ public class EarthquakeGUI extends JFrame
 		});
 		
 	}
+
+	@Override
+	public void windowActivated(WindowEvent e)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowClosed(WindowEvent e)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowClosing(WindowEvent e)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeactivated(WindowEvent e)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowDeiconified(WindowEvent e)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void windowIconified(WindowEvent e)
+	{
+		// TODO Auto-generated method stub
+		
+	}
 	
 	public static void main(String[] args)
 	{
 		new EarthquakeGUI().setVisible(true);
 	}
-
 }
