@@ -1,7 +1,10 @@
 package elberger.earthquake.net;
 
 import java.io.IOException;
+import java.util.Comparator;
+import java.util.Optional;
 
+import elberger.earthquake.Earthquake;
 import elberger.earthquake.EarthquakeFeed;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -20,38 +23,98 @@ public class EarthquakeRetrofitClient
 		
 		UsgsEarthquakeService service = retrofit.create(UsgsEarthquakeService.class);
 		
-		Call<EarthquakeFeed> call = service.getAllMonth();
-		
-		//Response<EarthquakeFeed> response = call.execute();
-		
-		call.enqueue(new Callback<EarthquakeFeed>()
+		Call<EarthquakeFeed> callMonth = service.getAllMonth();
+			
+		callMonth.enqueue(new Callback<EarthquakeFeed>()
 				{
 					@Override
-					public void onResponse(Call<EarthquakeFeed> call, Response<EarthquakeFeed> response)
+					public void onResponse(Call<EarthquakeFeed> callMonth, Response<EarthquakeFeed> responseMonth)
 					{
-						EarthquakeFeed feed = response.body();
+						EarthquakeFeed feedMonth = responseMonth.body();
 						
 						System.out.println(
-								feed.getFeatures()
+								feedMonth.getFeatures()
 									.stream()
 									.filter(e -> e.getProperties().getMag() >= 5)
 									.count());
 					}
 					
 					@Override
-					public void onFailure(Call<EarthquakeFeed> call, Throwable t)
+					public void onFailure(Call<EarthquakeFeed> callMonth, Throwable t)
 					{
 						t.printStackTrace();
 					}
 				});
 		
+
+		Call<EarthquakeFeed> callWeek = service.getAllWeek();
 		
-		/*EarthquakeFeed feed = response.body();
+		callWeek.enqueue(new Callback<EarthquakeFeed>()
+				{
+					@Override
+					public void onResponse(Call<EarthquakeFeed> callWeek, Response<EarthquakeFeed> responseWeek)
+					{
+						EarthquakeFeed feedWeek = responseWeek.body();
+						
+						System.out.println(
+								feedWeek.getFeatures()
+									.stream()
+									.filter(e -> e.getProperties().getMag() >= 5)
+									.count());
+					}
+					
+					@Override
+					public void onFailure(Call<EarthquakeFeed> callWeek, Throwable t)
+					{
+						t.printStackTrace();
+					}
+				});
+
+		Call<EarthquakeFeed> callDay = service.getAllDay();
 		
-		System.out.println(
-				feed.getFeatures()
-					.stream()
-					.filter(e -> e.getProperties().getMag() >= 5)
-					.count());*/
+		callDay.enqueue(new Callback<EarthquakeFeed>()
+				{
+					@Override
+					public void onResponse(Call<EarthquakeFeed> callDay, Response<EarthquakeFeed> responseDay)
+					{
+						EarthquakeFeed feedDay = responseDay.body();
+						
+						System.out.println(
+								feedDay.getFeatures()
+									.stream()
+									.filter(e -> e.getProperties().getMag() >= 5)
+									.count());
+					}
+					
+					@Override
+					public void onFailure(Call<EarthquakeFeed> callDay, Throwable t)
+					{
+						t.printStackTrace();
+					}
+				});
+		
+		Call<EarthquakeFeed> callHour = service.getAllHour();
+		
+		callHour.enqueue(new Callback<EarthquakeFeed>()
+				{
+					@Override
+					public void onResponse(Call<EarthquakeFeed> callHour, Response<EarthquakeFeed> responseHour)
+					{
+						EarthquakeFeed feedHour = responseHour.body();
+						
+						Optional<Earthquake> greatestHour = feedHour.getFeatures()
+							.stream()
+							.max(Comparator.comparing(e -> e.getProperties().getMag()));
+						
+						System.out.println(greatestHour.get().getProperties().getMag());
+						System.out.println(greatestHour.get().getProperties().getPlace());
+					}
+					
+					@Override
+					public void onFailure(Call<EarthquakeFeed> callHour, Throwable t)
+					{
+						t.printStackTrace();
+					}
+				});
 	}	
 }
