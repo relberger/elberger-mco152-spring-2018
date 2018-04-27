@@ -2,41 +2,35 @@ package elberger.earthquake.net;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import java.awt.event.WindowEvent;
+/*import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.util.Comparator;
 import java.util.Optional;
-
+*/
 import javax.swing.*;
+import javax.swing.text.JTextComponent;
 
-import elberger.earthquake.Earthquake;
+/*import elberger.earthquake.Earthquake;
 import elberger.earthquake.EarthquakeFeed;
 import retrofit2.Call;
 import retrofit2.Callback;
-import retrofit2.Response;
+import retrofit2.Response;*/
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class EarthquakeGUI extends JFrame implements WindowListener
+public class EarthquakeView extends JFrame //implements WindowListener
 {
 	private static final long serialVersionUID = 6111006689421939040L;
-	private JTextField monthMag = new JTextField();
-	private JTextField monthLoc = new JTextField();
-	private JTextField weekMag = new JTextField();
-	private JTextField weekLoc = new JTextField();
-	private JTextField dayMag = new JTextField();
-	private JTextField dayLoc = new JTextField();
-	private JTextField hourMag = new JTextField();
-	private JTextField hourLoc = new JTextField();
+	private JTextField monthMag;
+	private JTextField monthLoc;
+	private JTextField weekMag;
+	private JTextField weekLoc;
+	private JTextField dayMag;
+	private JTextField dayLoc;
+	private JTextField hourMag;
+	private JTextField hourLoc;
 	
-	Retrofit retrofit = new Retrofit.Builder()
-			.baseUrl("https://earthquake.usgs.gov")
-			.addConverterFactory(GsonConverterFactory.create())
-			.build();
-	
-	UsgsEarthquakeService service = retrofit.create(UsgsEarthquakeService.class);
-		
-	public EarthquakeGUI()
+	public EarthquakeView()
 	{
 		setTitle("Largest Earthquakes");
 		setSize(700, 400);
@@ -56,7 +50,16 @@ public class EarthquakeGUI extends JFrame implements WindowListener
 		JLabel dayLocLabel = new JLabel("Past day location:");
 		JLabel hourMagLabel = new JLabel("Past hour magnitude:");
 		JLabel hourLocLabel = new JLabel("Past hour location:");
-
+		
+		monthMag = new JTextField();
+		monthLoc = new JTextField();
+		weekMag = new JTextField();
+		weekLoc = new JTextField();
+		dayMag = new JTextField();
+		dayLoc = new JTextField();
+		hourMag = new JTextField();
+		hourLoc = new JTextField();
+		
 		earthquakePanel.add(monthMagLabel);
 		earthquakePanel.add(monthMag);
 		earthquakePanel.add(monthLocLabel);
@@ -83,15 +86,26 @@ public class EarthquakeGUI extends JFrame implements WindowListener
 		hourMag.setEditable(false);
 		hourLoc.setEditable(false);
 		
-		addWindowListener(this);
+//		addWindowListener(this);
 		
 		panel.add(earthquakePanel, BorderLayout.CENTER);
 		
 		add(panel);
+		
+		Retrofit retrofit = new Retrofit.Builder()
+				.baseUrl("https://earthquake.usgs.gov")
+				.addConverterFactory(GsonConverterFactory.create())
+				.build();
+		
+		UsgsEarthquakeService service = retrofit.create(UsgsEarthquakeService.class);
+			
+		EarthquakeController controller = new EarthquakeController(this, service);
+		
+		controller.refreshData();
 
 	}
 
-	public void getMonthValues()
+/*	public void getMonthValues()
 	{
 		Call<EarthquakeFeed> callMonth = service.getAllMonth();
 		callMonth.enqueue(new Callback<EarthquakeFeed>()
@@ -202,9 +216,9 @@ public class EarthquakeGUI extends JFrame implements WindowListener
 			}
 		});
 		
-	}
+	}*/
 
-	@Override
+/*	@Override
 	public void windowActivated(WindowEvent e)
 	{
 		
@@ -247,10 +261,51 @@ public class EarthquakeGUI extends JFrame implements WindowListener
 		getWeekValues();
 		getDayValues();
 		getHourValues();		
+	}*/
+
+
+	public JTextField getMonthMagTextField()
+	{
+		return monthMag;
 	}
-		
+
+	public JTextField getMonthLocTextField()
+	{
+		return monthLoc;
+	}
+	
 	public static void main(String[] args)
 	{
-		new EarthquakeGUI().setVisible(true);
+		new EarthquakeView().setVisible(true);
+	}
+
+	public JTextField getWeekMagTextField()
+	{
+		return weekMag;
+	}
+
+	public JTextField getWeekLocTextField()
+	{
+		return weekLoc;
+	}
+
+	public JTextField getDayMagTextField()
+	{
+		return dayMag;
+	}
+
+	public JTextComponent getDayLocTextField()
+	{
+		return dayLoc;
+	}
+
+	public JTextComponent getHourMagTextField()
+	{
+		return hourMag;
+	}
+
+	public JTextComponent getHourLocTextField()
+	{
+		return hourLoc;
 	}
 }
