@@ -1,8 +1,6 @@
 package elberger.wordcounter;
 
 import java.awt.BorderLayout;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.io.FileNotFoundException;
@@ -11,6 +9,8 @@ import javax.swing.*;
 
 public class WordCounterGUI extends JFrame
 {
+	private static final long serialVersionUID = 1L;
+
 	private JTextField word = new JTextField();
 	private JButton searchAll = new JButton("Search All Novels");
 	private JButton searchEmma = new JButton("Search 'Emma'");
@@ -101,7 +101,7 @@ public class WordCounterGUI extends JFrame
 		{
 			try
 			{
-				changeTextAll(e);
+				changeTextAll();
 			} catch (FileNotFoundException e1)
 			{
 				e1.printStackTrace();
@@ -112,14 +112,8 @@ public class WordCounterGUI extends JFrame
 		{
 			try
 			{
-				changeTextEmma(e);
-				
-				clearLadySusan(e);
-				clearMansfieldPark(e);
-				clearNorthangerAbbey(e);
-				clearPersuasion(e);
-				clearPrideAndPrejudice(e);
-				clearSenseAndSensibility(e);
+				clearAll();
+				changeTextEmma();
 			} catch (FileNotFoundException e1)
 			{
 				e1.printStackTrace();
@@ -130,14 +124,8 @@ public class WordCounterGUI extends JFrame
 		{
 			try
 			{
-				changeTextLadySusan(e);
-				
-				clearEmma(e);
-				clearMansfieldPark(e);
-				clearNorthangerAbbey(e);
-				clearPersuasion(e);
-				clearPrideAndPrejudice(e);
-				clearSenseAndSensibility(e);
+				clearAll();
+				changeTextLadySusan();
 			} catch (FileNotFoundException e1)
 			{
 				e1.printStackTrace();
@@ -148,14 +136,8 @@ public class WordCounterGUI extends JFrame
 		{
 			try
 			{
-				changeTextMansfieldPark(e);
-				
-				clearEmma(e);
-				clearLadySusan(e);
-				clearNorthangerAbbey(e);
-				clearPersuasion(e);
-				clearPrideAndPrejudice(e);
-				clearSenseAndSensibility(e);
+				clearAll();
+				changeTextMansfieldPark();
 			} catch (FileNotFoundException e1)
 			{
 				e1.printStackTrace();
@@ -166,14 +148,8 @@ public class WordCounterGUI extends JFrame
 		{
 			try
 			{
-				changeTextNorthangerAbbey(e);
-				
-				clearEmma(e);
-				clearLadySusan(e);
-				clearMansfieldPark(e);
-				clearPersuasion(e);
-				clearPrideAndPrejudice(e);
-				clearSenseAndSensibility(e);
+				clearAll();
+				changeTextNorthangerAbbey();
 			} catch (FileNotFoundException e1)
 			{
 				e1.printStackTrace();
@@ -184,14 +160,8 @@ public class WordCounterGUI extends JFrame
 		{
 			try
 			{
-				changeTextPersuasion(e);
-				
-				clearEmma(e);
-				clearLadySusan(e);
-				clearMansfieldPark(e);
-				clearNorthangerAbbey(e);
-				clearPrideAndPrejudice(e);
-				clearSenseAndSensibility(e);
+				clearAll();
+				changeTextPersuasion();
 			} catch (FileNotFoundException e1)
 			{
 				e1.printStackTrace();
@@ -202,14 +172,9 @@ public class WordCounterGUI extends JFrame
 		{
 			try
 			{
-				changeTextPrideAndPrejudice(e);
-			
-				clearEmma(e);
-				clearLadySusan(e);
-				clearMansfieldPark(e);
-				clearNorthangerAbbey(e);
-				clearPersuasion(e);
-				clearSenseAndSensibility(e);
+				clearAll();
+				changeTextPrideAndPrejudice();
+
 			} catch (FileNotFoundException e1)
 			{
 				e1.printStackTrace();
@@ -220,14 +185,8 @@ public class WordCounterGUI extends JFrame
 		{
 			try
 			{
-				changeTextSenseAndSensibility(e);
-				
-				clearEmma(e);
-				clearLadySusan(e);
-				clearMansfieldPark(e);
-				clearNorthangerAbbey(e);
-				clearPersuasion(e);
-				clearPrideAndPrejudice(e);
+				clearAll();
+				changeTextSenseAndSensibility();
 			} catch (FileNotFoundException e1)
 			{
 				e1.printStackTrace();
@@ -237,105 +196,81 @@ public class WordCounterGUI extends JFrame
 		add(panel);
 	}
 
-	public void changeTextEmma(ActionEvent e) throws FileNotFoundException
+	public int countOccurrences(String fileName, String wordInput) throws FileNotFoundException
 	{
-		WordCounter countEmma = new WordCounter("src/elberger/wordcounter/Emma.txt");
-		String searchingEmma = word.getText().toLowerCase();
-		String numEmma = String.valueOf(countEmma.Count(searchingEmma));
+		WordCounter counter = new WordCounter(fileName);
+		wordInput = word.getText().toLowerCase();
+		int num = counter.count(wordInput);
+		return num;
+	}
+
+	public void changeTextEmma() throws FileNotFoundException
+	{
+		String numEmma = String.valueOf(countOccurrences("src/elberger/wordcounter/Emma.txt", word.getText()));
 		emma.setText(numEmma);
 	}
 
-	public void changeTextLadySusan(ActionEvent e) throws FileNotFoundException
+	public void changeTextLadySusan() throws FileNotFoundException
 	{
-		WordCounter countLadySusan = new WordCounter("src/elberger/wordcounter/LadySusan.txt");
-		String searchingLadySusan = word.getText().toLowerCase();
-		String numLadySusan = String.valueOf(countLadySusan.Count(searchingLadySusan));
+		String numLadySusan = String
+				.valueOf(countOccurrences("src/elberger/wordcounter/LadySusan.txt", word.getText()));
 		ladySusan.setText(numLadySusan);
 	}
 
-	public void changeTextMansfieldPark(ActionEvent e) throws FileNotFoundException
+	public void changeTextMansfieldPark() throws FileNotFoundException
 	{
-		WordCounter countMansfieldPark = new WordCounter("src/elberger/wordcounter/MansfieldPark.txt");
-		String searchingMansfieldPark = word.getText().toLowerCase();
-		String numMansfieldPark = String.valueOf(countMansfieldPark.Count(searchingMansfieldPark));
+		String numMansfieldPark = String
+				.valueOf(countOccurrences("src/elberger/wordcounter/MansfieldPark.txt", word.getText()));
 		mansfieldPark.setText(numMansfieldPark);
 	}
 
-	public void changeTextNorthangerAbbey(ActionEvent e) throws FileNotFoundException
+	public void changeTextNorthangerAbbey() throws FileNotFoundException
 	{
-		WordCounter countNorthangerAbbey = new WordCounter("src/elberger/wordcounter/NorthangerAbbey.txt");
-		String searchingNorthangerAbbey = word.getText().toLowerCase();
-		String numNorthangerAbbey = String.valueOf(countNorthangerAbbey.Count(searchingNorthangerAbbey));
+		String numNorthangerAbbey = String
+				.valueOf(countOccurrences("src/elberger/wordcounter/NorthangerAbbey.txt", word.getText()));
 		northangerAbbey.setText(numNorthangerAbbey);
 	}
 
-	public void changeTextPersuasion(ActionEvent e) throws FileNotFoundException
+	public void changeTextPersuasion() throws FileNotFoundException
 	{
-		WordCounter countPersuasion = new WordCounter("src/elberger/wordcounter/Persuasion.txt");
-		String searchingPersuasion = word.getText().toLowerCase();
-		String numPersuasion = String.valueOf(countPersuasion.Count(searchingPersuasion));
+		String numPersuasion = String
+				.valueOf(countOccurrences("src/elberger/wordcounter/Persuasion.txt", word.getText()));
 		persuasion.setText(numPersuasion);
 	}
 
-	public void changeTextPrideAndPrejudice(ActionEvent e) throws FileNotFoundException
+	public void changeTextPrideAndPrejudice() throws FileNotFoundException
 	{
-		WordCounter countPrideAndPrejudice = new WordCounter("src/elberger/wordcounter/PrideAndPrejudice.txt");
-		String searchingPrideAndPrejudice = word.getText().toLowerCase();
-		String numPrideAndPrejudice = String.valueOf(countPrideAndPrejudice.Count(searchingPrideAndPrejudice));
+		String numPrideAndPrejudice = String
+				.valueOf(countOccurrences("src/elberger/wordcounter/PrideAndPrejudice.txt", word.getText()));
 		prideAndPrejudice.setText(numPrideAndPrejudice);
 	}
 
-	public void changeTextSenseAndSensibility(ActionEvent e) throws FileNotFoundException
+	public void changeTextSenseAndSensibility() throws FileNotFoundException
 	{
-		WordCounter countSenseAndSensibility = new WordCounter("src/elberger/wordcounter/SenseAndSensibility.txt");
-		String searchingSenseAndSensibility = word.getText().toLowerCase();
-		String numSenseAndSensibility = String.valueOf(countSenseAndSensibility.Count(searchingSenseAndSensibility));
+		String numSenseAndSensibility = String
+				.valueOf(countOccurrences("src/elberger/wordcounter/SenseAndSensibility.txt", word.getText()));
 		senseAndSensibility.setText(numSenseAndSensibility);
 	}
 
-	public void changeTextAll(ActionEvent e) throws FileNotFoundException
+	public void changeTextAll() throws FileNotFoundException
 	{
-		changeTextEmma(e);
-		changeTextLadySusan(e);
-		changeTextMansfieldPark(e);
-		changeTextNorthangerAbbey(e);
-		changeTextPersuasion(e);
-		changeTextPrideAndPrejudice(e);
-		changeTextSenseAndSensibility(e);
+		changeTextEmma();
+		changeTextLadySusan();
+		changeTextMansfieldPark();
+		changeTextNorthangerAbbey();
+		changeTextPersuasion();
+		changeTextPrideAndPrejudice();
+		changeTextSenseAndSensibility();
 	}
 
-	public void clearEmma(ActionEvent e)
+	public void clearAll()
 	{
 		emma.setText("");
-	}
-
-	public void clearLadySusan(ActionEvent e)
-	{
 		ladySusan.setText("");
-	}
-
-	public void clearMansfieldPark(ActionEvent e)
-	{
 		mansfieldPark.setText("");
-	}
-
-	public void clearNorthangerAbbey(ActionEvent e)
-	{
 		northangerAbbey.setText("");
-	}
-
-	public void clearPersuasion(ActionEvent e)
-	{
 		persuasion.setText("");
-	}
-
-	public void clearPrideAndPrejudice(ActionEvent e)
-	{
 		prideAndPrejudice.setText("");
-	}
-
-	public void clearSenseAndSensibility(ActionEvent e)
-	{
 		senseAndSensibility.setText("");
 	}
 

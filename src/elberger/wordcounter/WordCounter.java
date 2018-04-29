@@ -10,12 +10,13 @@ import java.util.Scanner;
 
 public class WordCounter
 {
-	Collection<String> words = new ArrayList<>();
+	private Collection<String> words = new ArrayList<>();
 
 	public WordCounter(String book) throws FileNotFoundException
 	{
 		String bookTitle = book;
 		String word = null;
+		@SuppressWarnings("resource")
 		Scanner scanner = new Scanner(new FileReader(new File(bookTitle)));
 		scanner.useDelimiter("[^a-zA-Z'-]+");
 
@@ -27,7 +28,7 @@ public class WordCounter
 		}
 	}
 
-	public int Count(String word)
+	public int count(String word)
 	{
 		int frequency = Collections.frequency(words, word);
 		return frequency;
