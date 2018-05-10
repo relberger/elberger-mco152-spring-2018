@@ -5,7 +5,7 @@ import java.util.Comparator;
 import java.util.Optional;
 
 import elberger.earthquake.Earthquake;
-import elberger.earthquake.EarthquakeFeed;
+import elberger.earthquake.EarthquakeFeedModel;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -23,14 +23,14 @@ public class EarthquakeRetrofitClient
 		
 		UsgsEarthquakeService service = retrofit.create(UsgsEarthquakeService.class);
 		
-		Call<EarthquakeFeed> callMonth = service.getAllMonth();
+		Call<EarthquakeFeedModel> callMonth = service.getAllMonth();
 			
-		callMonth.enqueue(new Callback<EarthquakeFeed>()
+		callMonth.enqueue(new Callback<EarthquakeFeedModel>()
 				{
 					@Override
-					public void onResponse(Call<EarthquakeFeed> callMonth, Response<EarthquakeFeed> responseMonth)
+					public void onResponse(Call<EarthquakeFeedModel> callMonth, Response<EarthquakeFeedModel> responseMonth)
 					{
-						EarthquakeFeed feedMonth = responseMonth.body();
+						EarthquakeFeedModel feedMonth = responseMonth.body();
 						
 						Optional<Earthquake> greatestMonth = feedMonth.getFeatures()
 								.stream()
@@ -41,21 +41,21 @@ public class EarthquakeRetrofitClient
 					}
 					
 					@Override
-					public void onFailure(Call<EarthquakeFeed> callMonth, Throwable t)
+					public void onFailure(Call<EarthquakeFeedModel> callMonth, Throwable t)
 					{
 						t.printStackTrace();
 					}
 				});
 		
 
-		Call<EarthquakeFeed> callWeek = service.getAllWeek();
+		Call<EarthquakeFeedModel> callWeek = service.getAllWeek();
 		
-		callWeek.enqueue(new Callback<EarthquakeFeed>()
+		callWeek.enqueue(new Callback<EarthquakeFeedModel>()
 				{
 					@Override
-					public void onResponse(Call<EarthquakeFeed> callWeek, Response<EarthquakeFeed> responseWeek)
+					public void onResponse(Call<EarthquakeFeedModel> callWeek, Response<EarthquakeFeedModel> responseWeek)
 					{
-						EarthquakeFeed feedWeek = responseWeek.body();
+						EarthquakeFeedModel feedWeek = responseWeek.body();
 						
 						Optional<Earthquake> greatestWeek = feedWeek.getFeatures()
 								.stream()
@@ -66,20 +66,20 @@ public class EarthquakeRetrofitClient
 					}
 					
 					@Override
-					public void onFailure(Call<EarthquakeFeed> callWeek, Throwable t)
+					public void onFailure(Call<EarthquakeFeedModel> callWeek, Throwable t)
 					{
 						t.printStackTrace();
 					}
 				});
 
-		Call<EarthquakeFeed> callDay = service.getAllDay();
+		Call<EarthquakeFeedModel> callDay = service.getAllDay();
 		
-		callDay.enqueue(new Callback<EarthquakeFeed>()
+		callDay.enqueue(new Callback<EarthquakeFeedModel>()
 				{
 					@Override
-					public void onResponse(Call<EarthquakeFeed> callDay, Response<EarthquakeFeed> responseDay)
+					public void onResponse(Call<EarthquakeFeedModel> callDay, Response<EarthquakeFeedModel> responseDay)
 					{
-						EarthquakeFeed feedDay = responseDay.body();
+						EarthquakeFeedModel feedDay = responseDay.body();
 						
 						Optional<Earthquake> greatestDay = feedDay.getFeatures()
 								.stream()
@@ -90,20 +90,20 @@ public class EarthquakeRetrofitClient
 					}
 					
 					@Override
-					public void onFailure(Call<EarthquakeFeed> callDay, Throwable t)
+					public void onFailure(Call<EarthquakeFeedModel> callDay, Throwable t)
 					{
 						t.printStackTrace();
 					}
 				});
 		
-		Call<EarthquakeFeed> callHour = service.getAllHour();
+		Call<EarthquakeFeedModel> callHour = service.getAllHour();
 		
-		callHour.enqueue(new Callback<EarthquakeFeed>()
+		callHour.enqueue(new Callback<EarthquakeFeedModel>()
 				{
 					@Override
-					public void onResponse(Call<EarthquakeFeed> callHour, Response<EarthquakeFeed> responseHour)
+					public void onResponse(Call<EarthquakeFeedModel> callHour, Response<EarthquakeFeedModel> responseHour)
 					{
-						EarthquakeFeed feedHour = responseHour.body();
+						EarthquakeFeedModel feedHour = responseHour.body();
 						
 						Optional<Earthquake> greatestHour = feedHour.getFeatures()
 							.stream()
@@ -114,7 +114,7 @@ public class EarthquakeRetrofitClient
 					}
 					
 					@Override
-					public void onFailure(Call<EarthquakeFeed> callHour, Throwable t)
+					public void onFailure(Call<EarthquakeFeedModel> callHour, Throwable t)
 					{
 						t.printStackTrace();
 					}

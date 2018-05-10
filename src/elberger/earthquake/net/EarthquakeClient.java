@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import com.google.gson.Gson;
-import elberger.earthquake.EarthquakeFeed;
+import elberger.earthquake.EarthquakeFeedModel;
 
 public class EarthquakeClient
 {
@@ -19,7 +19,7 @@ public class EarthquakeClient
 		InputStream in = connection.getInputStream();
 		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 		Gson gson = new Gson();
-		EarthquakeFeed feed = gson.fromJson(reader, EarthquakeFeed.class);
+		EarthquakeFeedModel feed = gson.fromJson(reader, EarthquakeFeedModel.class);
 		
 		System.out.println(
 				feed.getFeatures()

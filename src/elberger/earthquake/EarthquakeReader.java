@@ -16,7 +16,7 @@ public class EarthquakeReader
 		BufferedReader in = new BufferedReader 
 				(new FileReader(new File("src/elberger/earthquake/all_month.geojson")));
 		
-		EarthquakeFeed feed = gson.fromJson(in, EarthquakeFeed.class);
+		EarthquakeFeedModel feed = gson.fromJson(in, EarthquakeFeedModel.class);
 		
 		System.out.println(feed.getFeatures()
 									.stream()

@@ -6,6 +6,14 @@ public class EarthquakeProperties
 	private String place;
 	private long time;
 	
+	public EarthquakeProperties(double mag, String place, long time)
+	{
+		super();
+		this.mag = mag;
+		this.place = place;
+		this.time = time;
+	}
+	
 	public double getMag()
 	{
 		return mag;
