@@ -10,6 +10,11 @@ import java.util.Optional;
 import javax.swing.*;
 import javax.swing.text.JTextComponent;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+import com.google.inject.Singleton;
+
+import elberger.earthquake.Earthquake;
 /*import elberger.earthquake.Earthquake;
 import elberger.earthquake.EarthquakeFeed;
 import retrofit2.Call;
@@ -18,6 +23,7 @@ import retrofit2.Response;*/
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+@Singleton
 public class EarthquakeView extends JFrame //implements WindowListener
 {
 	private static final long serialVersionUID = 6111006689421939040L;
@@ -91,18 +97,6 @@ public class EarthquakeView extends JFrame //implements WindowListener
 		panel.add(earthquakePanel, BorderLayout.CENTER);
 		
 		add(panel);
-		
-		Retrofit retrofit = new Retrofit.Builder()
-				.baseUrl("https://earthquake.usgs.gov")
-				.addConverterFactory(GsonConverterFactory.create())
-				.build();
-		
-		UsgsEarthquakeService service = retrofit.create(UsgsEarthquakeService.class);
-			
-		EarthquakeController controller = new EarthquakeController(this, service);
-		
-		controller.refreshData();
-
 	}
 
 /*	public void getMonthValues()
@@ -218,52 +212,6 @@ public class EarthquakeView extends JFrame //implements WindowListener
 		
 	}*/
 
-/*	@Override
-	public void windowActivated(WindowEvent e)
-	{
-		
-	}
-
-	@Override
-	public void windowClosed(WindowEvent e)
-	{
-		
-	}
-
-	@Override
-	public void windowClosing(WindowEvent e)
-	{
-		
-	}
-
-	@Override
-	public void windowDeactivated(WindowEvent e)
-	{
-		
-	}
-
-	@Override
-	public void windowDeiconified(WindowEvent e)
-	{
-		
-	}
-
-	@Override
-	public void windowIconified(WindowEvent e)
-	{
-		
-	}
-	
-	@Override
-	public void windowOpened(WindowEvent e)
-	{
-		getMonthValues();
-		getWeekValues();
-		getDayValues();
-		getHourValues();		
-	}*/
-
-
 	public JTextField getMonthMagTextField()
 	{
 		return monthMag;
@@ -273,11 +221,7 @@ public class EarthquakeView extends JFrame //implements WindowListener
 	{
 		return monthLoc;
 	}
-	
-	public static void main(String[] args)
-	{
-		new EarthquakeView().setVisible(true);
-	}
+
 
 	public JTextField getWeekMagTextField()
 	{
@@ -307,5 +251,18 @@ public class EarthquakeView extends JFrame //implements WindowListener
 	public JTextComponent getHourLocTextField()
 	{
 		return hourLoc;
+	}
+	
+	public static void main(String[] args)
+	{
+		Injector injector = Guice.createInjector(new EarthquakeModule());
+		
+		EarthquakeView view = injector.getInstance(EarthquakeView.class);
+		
+		EarthquakeController controller = injector.getInstance(EarthquakeController.class);
+		
+		controller.refreshData();
+
+		view.setVisible(true);
 	}
 }

@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import javax.swing.text.JTextComponent;
 
+import com.google.inject.Inject;
+
 import elberger.earthquake.Earthquake;
 import elberger.earthquake.EarthquakeFeedModel;
 import elberger.earthquake.EarthquakeProperties;
@@ -17,6 +19,7 @@ public class EarthquakeController
 	private EarthquakeView view;
 	private UsgsEarthquakeService service;
 
+	@Inject
 	public EarthquakeController(EarthquakeView view, UsgsEarthquakeService service)
 	{
 		this.view = view;
